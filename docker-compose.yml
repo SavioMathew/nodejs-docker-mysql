@@ -1,0 +1,37 @@
+version: '3.9'
+
+
+services:
+  mysql:
+    build: ./backend
+    container_name: mysql_ubuntu
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"
+
+  nodejs:
+    build: ./frontend
+    container_name: nodejs_ubuntu
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: mydb
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
+volumes:
+  db_data:
