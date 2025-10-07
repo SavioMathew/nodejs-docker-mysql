@@ -3,7 +3,7 @@ version: '3.9'
 
 services:
   mysql:
-    build: ./backend
+    build: saviomathew/docker-njs-mysql:latest
     container_name: mysql_ubuntu
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -16,7 +16,7 @@ services:
       - "3306:3306"
 
   nodejs:
-    build: ./frontend
+    build: saviomathew/docker-njs-mysql:latest1
     container_name: nodejs_ubuntu
     depends_on:
       - mysql
