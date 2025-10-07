@@ -1,0 +1,18 @@
+# Use Ubuntu as base image
+FROM ubuntu:22.04
+
+# Install MySQL server
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server && apt-get clean
+
+# Copy initialization SQL
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=mydb
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Start MySQL service
+CMD ["mysqld_safe"]
