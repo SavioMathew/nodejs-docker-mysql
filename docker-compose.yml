@@ -18,7 +18,7 @@ services:
       - "3306:3306"
 
   nodejs:
-    image: nodejs:v5 
+    image: saviomathew/docker-njs-mysql:nodejs-v5 
     container_name: nodejs_ubuntu
     depends_on:
       - mysql
