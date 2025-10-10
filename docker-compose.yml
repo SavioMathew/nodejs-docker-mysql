@@ -1,6 +1,5 @@
 version: '3.9'
 
-
 services:
   mysql:
     image: mysql:8.0
@@ -13,9 +12,7 @@ services:
 
       - db_data:/var/lib/mysql
     networks:
-      - app-network
-    ports:
-      - "3306:3306"
+      - frontend
 
   nodejs:
     image: saviomathew/docker-njs-mysql:nodejs-v5 
@@ -30,10 +27,11 @@ services:
     expose:
       - 3000
     networks:
-      - app-network
+      - backend
+      - frontend
 
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: nginx_proxy
     depends_on:
       - nodejs
@@ -42,11 +40,12 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     networks:
-      - app-network
+      - frontend
 
 
 networks:
-  app-network:
+  backend:
+  frontend:
 
 volumes:
   db_data:
