@@ -12,7 +12,7 @@ services:
 
       - db_data:/var/lib/mysql
     networks:
-      - frontend
+      - backend
 
   nodejs:
     image: saviomathew/docker-njs-mysql:nodejs-v5 
