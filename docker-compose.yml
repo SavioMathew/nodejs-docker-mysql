@@ -27,10 +27,23 @@ services:
       DB_USER: root
       DB_PASSWORD: rootpassword
       DB_NAME: mydb
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     networks:
       - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    depends_on:
+      - nodejs
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    networks:
+      - app-network
+
 
 networks:
   app-network:
