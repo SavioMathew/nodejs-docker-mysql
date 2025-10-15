@@ -1,0 +1,52 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  4.577MB
+Step 1/13 : FROM node:22-alpine
+ ---> 735b621e3e54
+Step 2/13 : WORKDIR /app
+ ---> Running in d15a611010d5
+ ---> Removed intermediate container d15a611010d5
+ ---> 8f7b9095690e
+Step 3/13 : COPY package*.json ./
+ ---> a3b7b7efb2a1
+Step 4/13 : RUN npm install --production
+ ---> Running in 8ca1b5962a1c
+[91mnpm warn config production Use `--omit=dev` instead.
+[0m
+added 81 packages, and audited 82 packages in 2s
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+[91mnpm notice
+npm notice New major version of npm available! 10.9.3 -> 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+[0m ---> Removed intermediate container 8ca1b5962a1c
+ ---> 49b86e01aa96
+Step 5/13 : COPY . .
+ ---> 677c84511676
+Step 6/13 : FROM node:22-alpine
+ ---> 735b621e3e54
+Step 7/13 : RUN addgroup -S appgroup && adduser - S appuser - G appgroup
+ ---> Running in 6dfb7c7ef4d8
+[91mBusyBox v1.37.0 (2025-08-05 16:40:33 UTC)[0m[91m multi-call binary.
+
+Usage: adduser [OPTIONS] USER [GROUP]
+
+Create new user, or add USER to GROUP
+
+	-h DIR		Home directory
+	-g GECOS	GECOS field
+	-s SHELL	Login shell
+	-G GRP		Group
+	-S		Create a system user
+	-D		Don't assign a password
+	-H		Don't create home directory
+	-u UID		User id
+	-k SKEL		Skeleton directory (/etc/skel)
+[0mThe command '/bin/sh -c addgroup -S appgroup && adduser - S appuser - G appgroup' returned a non-zero code: 1

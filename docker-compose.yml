@@ -15,6 +15,8 @@ services:
       - backend
 
   nodejs:
+    build:
+      context: ./frontend/
     image: saviomathew/docker-njs-mysql:nodejs-v5 
     container_name: nodejs_ubuntu
     depends_on:
@@ -24,6 +26,7 @@ services:
       DB_USER: root
       DB_PASSWORD: rootpassword
       DB_NAME: mydb
+    user: "1001:1001"
     expose:
       - 3000
     networks:
