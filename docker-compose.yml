@@ -12,7 +12,9 @@ services:
 
       - db_data:/var/lib/mysql
     networks:
-      - backend
+      backend:
+        aliases:
+          - mysql_ubuntu
 
   nodejs:
     build:
@@ -30,8 +32,8 @@ services:
     expose:
       - 3000
     networks:
-      - backend
-      - frontend
+      backend: {}
+      frontend: {}
 
   nginx:
     image: nginx:alpine
@@ -43,12 +45,21 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     networks:
-      - frontend
+      frontend: {}
 
 
 networks:
   backend:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+          ip_range: 172.25.5.0/24
+          gateway: 172.25.0.1
+
   frontend:
+    driver: bridge
 
 volumes:
   db_data:
