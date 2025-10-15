@@ -52,11 +52,6 @@ networks:
   backend:
     driver: bridge
     internal: true
-    ipam:
-      config:
-        - subnet: 172.25.0.0/16
-          ip_range: 172.25.5.0/24
-          gateway: 172.25.0.1
 
   frontend:
     driver: bridge
