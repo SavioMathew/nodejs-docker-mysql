@@ -7,6 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
     volumes:
       - ./database/mysql-init:/docker-entrypoint-initdb.d
 
@@ -25,8 +27,8 @@ services:
       - mysql
     environment:
       DB_HOST: mysql_ubuntu
-      DB_USER: root
-      DB_PASSWORD: rootpassword
+      DB_USER: user
+      DB_PASSWORD: userpassword
       DB_NAME: mydb
     user: "1001:1001"
     expose:
