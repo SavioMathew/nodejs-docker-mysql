@@ -30,6 +30,8 @@ services:
       DB_USER: user
       DB_PASSWORD: userpassword
       DB_NAME: mydb
+      HEALTH_TOKEN: health-123
+      METRICS_TOKEN: metrics-123
     user: "1001:1001"
     expose:
       - 3000
